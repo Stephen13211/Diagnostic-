@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS Keys & Diagnostics | ECU & Immobilizer Solutions</title>
+  <meta name="description" content="CS Keys & Diagnostics in Port Elizabeth. ECU programming, module coding, ECU cloning, car keys, immobilizers and vehicle diagnostics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0878ff;
+      --bright-blue: #22a7ff;
+      --black: #05070b;
+      --card: #101722;
+      --white: #fff;
+      --muted: #aab4c4;
+      --line: rgba(126,175,255,.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: radial-gradient(circle at 75% 10%, rgba(0,117,255,.16), transparent 28rem),
+                  linear-gradient(135deg,#030508,#081321 58%,#030508);
+      color: var(--white);
+      font-family: "Inter",sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px,calc(100% - 40px));
+      margin: auto;
+    }
+
+    .top-bar {
+      border-bottom: 1px solid var(--line);
+      background: rgba(0,0,0,.55);
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .top-bar-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(4,7,13,.92);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Barlow Condensed",sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      line-height: .95;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--blue);
+      border-radius: 14px 4px;
+      color: var(--bright-blue);
+      font-size: 1.35rem;
+      box-shadow: 0 0 22px rgba(0,132,255,.45);
+    }
+
+    .brand-name span { color: var(--bright-blue); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 7px;
+      background: linear-gradient(135deg,var(--blue),#0046c7);
+      color: var(--white);
+      font-size: .86rem;
+      font-weight: 800;
+      box-shadow: 0 10px 28px rgba(0,104,255,.24);
+      transition: transform .2s,box-shadow .2s;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0,125,255,.38);
+    }
+
+    .button-outline {
+      border-color: var(--line);
+      background: rgba(255,255,255,.04);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg,rgba(3,6,12,.98),rgba(3,8,18,.84) 55%,rgba(3,7,14,.45)),
+        url("https://images.unsplash.com/photo-1727893380169-4dda123e19f7?auto=format&fit=crop&w=1800&q=85") center/cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      background: linear-gradient(transparent,var(--black));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      padding: 90px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--bright-blue);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--bright-blue);
+    }
+
+    h1,h2,h3 {
+      font-family: "Barlow Condensed",sans-serif;
+      text-transform: uppercase;
+      line-height: .98;
+    }
+
+    h1 {
+      margin: 22px 0;
+      font-size: clamp(3.7rem,9vw,7.8rem);
+      letter-spacing: -.045em;
+    }
+
+    h1 span,.section-heading h2 span,.about-copy h2 span {
+      color: var(--bright-blue);
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      color: #c8d3e2;
+      font-size: 1.02rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 32px;
+    }
+
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 38px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .hero-contact strong { color: var(--white); }
+
+    section { padding: 90px 0; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      max-width: 570px;
+      margin-top: 10px;
+      font-size: clamp(2.8rem,6vw,5rem);
+      letter-spacing: -.035em;
+    }
+
+    .section-heading p {
+      max-width: 420px;
+      color: var(--muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 215px;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(145deg,rgba(18,36,63,.95),rgba(8,13,22,.95));
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+      transition: transform .25s,border-color .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(34,167,255,.75);
+    }
+
+    .service-number {
+      color: var(--bright-blue);
+      font-family: "Barlow Condensed",sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      margin: 22px 0 10px;
+      font-size: 1.75rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .service-icon {
+      position: absolute;
+      right: 25px;
+      top: 23px;
+      color: rgba(34,167,255,.28);
+      font-size: 3rem;
+    }
+
+    .about-section {
+      background: linear-gradient(90deg,rgba(4,13,28,.98),rgba(4,13,28,.87)),
+                  url("https://images.unsplash.com/photo-1702146713858-8e7d1cc29fe8?auto=format&fit=crop&w=1600&q=85") center/cover;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .about-copy h2 {
+      margin: 18px 0 22px;
+      font-size: clamp(3rem,6vw,5.2rem);
+    }
+
+    .about-copy p { max-width: 560px; color: var(--muted); }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .benefit {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(0,0,0,.28);
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: .9rem;
+    }
+
+    .benefit span { color: var(--muted); font-size: .8rem; }
+
+    .equipment-card {
+      position: relative;
+      min-height: 410px;
+      display: flex;
+      align-items: end;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(34,167,255,.48);
+      border-radius: 18px;
+      background: linear-gradient(0deg,rgba(2,6,14,.95),transparent 70%),
+                  url("https://images.unsplash.com/photo-1702146713858-8e7d1cc29fe8?auto=format&fit=crop&w=1000&q=85") center/cover;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .equipment-label { position: relative; z-index: 1; }
+
+    .equipment-label h3 { font-size: 2.7rem; }
+
+    .equipment-label p { color: #c5d2e0; font-size: .9rem; }
+
+    .coverage { background: var(--black); }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+    }
+
+    .coverage-item {
+      padding: 23px 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      text-align: center;
+    }
+
+    .coverage-item .emoji {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 2rem;
+    }
+
+    .coverage-item strong { display: block; font-size: .88rem; }
+
+    .coverage-item span:last-child { color: var(--muted); font-size: .78rem; }
+
+    .contact-section {
+      padding: 100px 0;
+      background: linear-gradient(130deg,rgba(0,70,190,.96),rgba(4,13,30,.97));
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .contact-copy h2 {
+      margin: 16px 0 20px;
+      font-size: clamp(3.2rem,7vw,6rem);
+    }
+
+    .contact-copy p { max-width: 550px; color: #d4e5ff; }
+
+    .contact-links { display: grid; gap: 12px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      background: rgba(0,0,0,.24);
+      transition: background .2s,transform .2s;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-link:hover {
+      transform: translateX(5px);
+      background: rgba(0,0,0,.42);
+    }
+
+    .contact-icon {
+      flex: 0 0 40px;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--blue);
+      font-size: 1.2rem;
+    }
+
+    .contact-link small { display: block; color: #bdd5ff; font-size: .72rem; }
+
+    .contact-link strong { font-size: .9rem; }
+
+    footer {
+      padding: 24px 0;
+      background: #020306;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 50px;
+      background: #25d366;
+      color: #061d10;
+      font-size: .85rem;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(37,211,102,.35);
+      transition: transform .2s,box-shadow .2s;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(37,211,102,.45);
+    }
+
+    @media (max-width: 800px) {
+      .top-bar-inner { justify-content: center; text-align: center; }
+      .top-bar-inner > span:first-child { display: none; }
+      .nav { min-height: 70px; }
+      .nav-links { display: none; }
+      .hero { min-height: 600px; }
+      .hero-content { padding: 70px 0; }
+      .services-grid,.about-grid,.contact-box { grid-template-columns: 1fr; }
+      .coverage-grid { grid-template-columns: repeat(2,1fr); }
+      .about-grid { gap: 35px; }
+      .equipment-card { min-height: 310px; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 18px; }
+    }
+
+    @media (max-width: 500px) {
+      .container { width: calc(100% - 28px); }
+      section { padding: 65px 0; }
+      h1 { font-size: 4.1rem; }
+      .hero-contact { display: grid; gap: 8px; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .button { width: 100%; }
+      .benefits { grid-template-columns: 1fr; }
+      .whatsapp-float { right: 14px; bottom: 14px; }
+      .brand { font-size: 1.35rem; }
+      .brand-mark { width: 40px; height: 40px; }
+      .nav > .button { width: auto; padding: 0 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <span>Advanced solutions. Professional results.</span>
+      <span>
+        <a href="tel:+27848993926">084 899 3926</a>
+        &nbsp; • &nbsp;
+        <a href="mailto:cskeysdiagnostics@gmail.com">cskeysdiagnostics@gmail.com</a>
+      </span>
+    </div>
+  </div>
+
+  <header>
+    <nav class="container nav">
+      <a class="brand" href="#home" aria-label="CS Keys and Diagnostics home">
+        <span class="brand-mark">CS</span>
+        <span class="brand-name">KEYS &amp;<br><span>DIAGNOSTICS</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <a class="button" href="https://wa.me/27848993926?text=Hello%20CS%20Keys%20%26%20Diagnostics%2C%20I%20would%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener">
+        WhatsApp Us
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="eyebrow">Port Elizabeth • Automotive Solutions</div>
+        <h1>ECU &amp; Module<br><span>Services</span></h1>
+        <p class="hero-copy">
+          Reliable ECU and module programming, cloning, diagnostics and repair
+          solutions for modern vehicles. Professional results without the hassle.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#contact">Get In Touch</a>
+          <a class="button button-outline" href="#services">Explore Services</a>
+        </div>
+
+        <div class="hero-contact">
+          <span>📍 <strong>Port Elizabeth</strong></span>
+          <span>🕒 <strong>Open All Hours</strong></span>
+          <span>🚐 <strong>Mobile Service Available</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">What We Do</div>
+            <h2>Specialist <span>Vehicle Electronics</span></h2>
+          </div>
+          <p>
+            Diagnostics and programming services for cars, SUVs, LDVs, bikes
+            and commercial vehicles.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-number">01</div>
+            <div class="service-icon">⚙</div>
+            <h3>ECU Programming</h3>
+            <p>Program new or used ECUs, read and back up ECU data, and recover interrupted programming where supported.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">02</div>
+            <div class="service-icon">▣</div>
+            <h3>Module Programming</h3>
+            <p>Program and code BCM, ECM, TCM and other vehicle control modules.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">03</div>
+            <div class="service-icon">⟳</div>
+            <h3>ECU Cloning</h3>
+            <p>Transfer supported data from an original ECU to a compatible replacement unit.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">04</div>
+            <div class="service-icon">⚿</div>
+            <h3>Keys &amp; Immobilizers</h3>
+            <p>Lost car keys, spare keys, key programming and immobilizer solutions.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">05</div>
+            <div class="service-icon">◷</div>
+            <h3>Cluster Services</h3>
+            <p>Read, back up, diagnose and program supported vehicle instrument clusters.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">06</div>
+            <div class="service-icon">✓</div>
+            <h3>Adaptations &amp; Coding</h3>
+            <p>Perform supported online and offline adaptations, coding and diagnostics.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <div class="eyebrow">Professional Equipment</div>
+          <h2>Modern Tools.<br><span>Precise Results.</span></h2>
+          <p>
+            Diagnostic and programming equipment helps us work efficiently on
+            supported vehicle systems while handling vehicle data carefully.
+          </p>
+
+          <div class="benefits">
+            <div class="benefit">
+              <strong>✓ Reliable Processes</strong>
+              <span>Careful handling from diagnosis to repair.</span>
+            </div>
+            <div class="benefit">
+              <strong>⚡ Efficient Service</strong>
+              <span>Practical solutions to reduce downtime.</span>
+            </div>
+            <div class="benefit">
+              <strong>🔒 Secure Data Handling</strong>
+              <span>Vehicle information handled responsibly.</span>
+            </div>
+            <div class="benefit">
+              <strong>🚐 Mobile Service</strong>
+              <span>Ask about mobile service in your area.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="equipment-card">
+          <div class="equipment-label">
+            <h3>Advanced Equipment</h3>
+            <p>Solutions for supported modern vehicle systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="coverage" id="coverage">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Wide Coverage</div>
+            <h2>Systems We <span>Work On</span></h2>
+          </div>
+          <p>From engine control units to instrument clusters and immobilizer systems.</p>
+        </div>
+
+        <div class="coverage-grid">
+          <div class="coverage-item">
+            <span class="emoji">▣</span>
+            <strong>ECU / ECM</strong>
+            <span>Engine control units</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">⚙</span>
+            <strong>TCM</strong>
+            <span>Transmission modules</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">▤</span>
+            <strong>BCM</strong>
+            <span>Body control modules</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">◉</span>
+            <strong>ABS Modules</strong>
+            <span>Brake system electronics</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">◇</span>
+            <strong>Airbag / SRS</strong>
+            <span>Safety module diagnostics</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">◌</span>
+            <strong>Instrument Cluster</strong>
+            <span>Cluster diagnostics</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">🚙</span>
+            <strong>Cars &amp; SUVs</strong>
+            <span>Supported vehicle brands</span>
+          </div>
+          <div class="coverage-item">
+            <span class="emoji">🚚</span>
+            <strong>LDVs &amp; Bikes</strong>
+            <span>Selected commercial vehicles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container contact-box">
+        <div class="contact-copy">
+          <div class="eyebrow">Quality • Precision • Performance</div>
+          <h2>Get In Touch<br><span>Today</span></h2>
+          <p>
+            Need a car key, module programmed, ECU cloned or vehicle diagnosed?
+            Contact CS Keys &amp; Diagnostics to discuss your requirements.
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a class="contact-link" href="tel:+27848993926">
+            <span class="contact-icon">☎</span>
+            <span><small>Call Us</small><strong>084 899 3926</strong></span>
+          </a>
+
+          <a class="contact-link" href="mailto:cskeysdiagnostics@gmail.com">
+            <span class="contact-icon">✉</span>
+            <span><small>Email Us</small><strong>cskeysdiagnostics@gmail.com</strong></span>
+          </a>
+
+          <a class="contact-link" href="https://maps.google.com/?q=Port+Elizabeth+South+Africa" target="_blank" rel="noopener">
+            <span class="contact-icon">⌖</span>
+            <span><small>Service Area</small><strong>Port Elizabeth &amp; Surrounds</strong></span>
+          </a>
+
+          <a class="button" href="https://wa.me/27848993926?text=Hello%20CS%20Keys%20%26%20Diagnostics%2C%20I%20would%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener">
+            ☎ Message Us On WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="whatsapp-float" href="https://wa.me/27848993926?text=Hello%20CS%20Keys%20%26%20Diagnostics%2C%20I%20would%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener" aria-label="Chat with CS Keys and Diagnostics on WhatsApp">
+    <span>☏</span> WhatsApp
+  </a>
+
+  <footer>
+    <div class="container">
+      © <span id="currentYear"></span> CS Keys &amp; Diagnostics. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
